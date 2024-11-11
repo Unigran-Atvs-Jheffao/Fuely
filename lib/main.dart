@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trabalho_final/components/fuely-drawer.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,11 +10,13 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+        drawer: FuelyDrawer(user: "Hakimen", email: "hakimen@hakimen.com",),
+        appBar: AppBar(
+          title: const Text('AppBar without hamburger button'),
         ),
+        floatingActionButton: FloatingActionButton(onPressed: (){}, child: Icon(Icons.add),),
       ),
     );
   }

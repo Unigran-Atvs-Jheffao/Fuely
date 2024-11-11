@@ -1,3 +1,3 @@
-# trabalho_final
+# Fuely
 
-A new Flutter project.
+Fuel Management goes brr
