@@ -1,12 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:trabalho_final/firebase_options.dart';
 import 'package:trabalho_final/state.dart';
 import 'package:trabalho_final/views/home.dart';
+import 'package:trabalho_final/views/login.dart';
 import 'package:trabalho_final/views/my_vehicles.dart';
 import 'package:trabalho_final/views/profile.dart';
 import 'package:trabalho_final/views/refuel_history.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const LoginView());
 }
 
 class MainApp extends StatefulWidget {
@@ -17,6 +24,7 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+
   void setScreen(BuildContext context, int scr) {
     setState(() {
       if (screen != scr) {
@@ -28,23 +36,22 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: Text("Fuely"),
+        title: const Text("Fuely"),
       ),
       drawer: Drawer(
         child: Builder(
           builder: (context) => ListView(padding: EdgeInsets.zero, children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.purple,
+             DrawerHeader(
+              decoration: const BoxDecoration(
+                color: Colors.orange
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("A"),
-                  Text("B"),
+                  Text(FirebaseAuth.instance.currentUser!.displayName ?? "User"),
+                  Text(FirebaseAuth.instance.currentUser!.email!),
                 ],
               ),
             ),
@@ -79,7 +86,10 @@ class _MainAppState extends State<MainApp> {
             ListTile(
               leading: Icon(Icons.logout),
               title: const Text('Logout'),
-              onTap: () {},
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginView()));
+              },
             ),
           ]),
         ),
@@ -90,6 +100,6 @@ class _MainAppState extends State<MainApp> {
         const RefuelHistoryView(),
         const ProfileView()
         ][screen],
-    ));
+    );
   }
 }

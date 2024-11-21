@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "965901105705",
+    "project_id": "fuely-5b057",
+    "storage_bucket": "fuely-5b057.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965901105705:android:58620cb0a4ed2063813a38",
+        "android_client_info": {
+          "package_name": "io.flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKM4pgdScI3Dsou9dYKT0jszt8Bg7GluM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
