@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trabalho_final/models/vehicle.dart';
 import 'package:trabalho_final/state.dart';
-import 'package:trabalho_final/views/my_vehicles.dart';
+
 
 class AddVehicle extends StatefulWidget {
   final Vehicle? toEdit;
@@ -26,6 +26,7 @@ class _AddVehicleState extends State<AddVehicle> {
 
   @override
   void initState() {
+    super.initState();
     if (widget.toEdit != null) {
       nameController = TextEditingController(text: widget.toEdit!.name);
       modelController = TextEditingController(text: widget.toEdit!.model);

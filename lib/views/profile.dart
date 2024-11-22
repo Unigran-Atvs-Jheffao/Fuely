@@ -8,7 +8,6 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     var usr = FirebaseAuth.instance.currentUser!;
 
-  
     return Center(
       child: Column(
         children: [

@@ -66,54 +66,59 @@ class LoginView extends StatelessWidget {
                       },
                     ),
                   ),
-                  Builder(builder: (context) {
-                    FirebaseAuth.instance
-                        .authStateChanges()
-                        .listen((User? user) {
-                      if (user != null && user.emailVerified && !user.isAnonymous) {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => MainApp()));
-                      }
-                    });
+                  Builder(
+                    builder: (context) {
+                      FirebaseAuth.instance
+                          .authStateChanges()
+                          .listen((User? user) {
+                        if (user != null &&
+                            user.emailVerified &&
+                            !user.isAnonymous) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MainApp()));
+                        }
+                      });
 
-                    return FilledButton(
-                      onPressed: () async {
-                        WidgetsFlutterBinding.ensureInitialized();
+                      return FilledButton(
+                        onPressed: () async {
+                          WidgetsFlutterBinding.ensureInitialized();
 
-                        if (_formKey.currentState!.validate()) {
-                          try {
-                            final credential = await FirebaseAuth.instance
-                                .signInWithEmailAndPassword(
-                                    email: emailController.value.text,
-                                    password: passwordController.value.text);
+                          if (_formKey.currentState!.validate()) {
+                            try {
+                              final credential = await FirebaseAuth.instance
+                                  .signInWithEmailAndPassword(
+                                      email: emailController.value.text,
+                                      password: passwordController.value.text);
 
-                              if(!credential.user!.emailVerified){
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                  content: Text(
-                                      'User is not verified')));
+                              if (!credential.user!.emailVerified) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text('User is not verified')));
                               }
-                                    
-                          } on FirebaseAuthException catch (e) {
-                            if (e.code == 'user-not-found') {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text(
-                                          'No user found for that email.')));
-                            } else if (e.code == 'wrong-password') {
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                  content: Text(
-                                      'Wrong password provided for that user.')));
+                            } on FirebaseAuthException catch (e) {
+                              if (e.code == 'user-not-found') {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            'No user found for that email.')));
+                              } else if (e.code == 'wrong-password') {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                        'Wrong password provided for that user.')));
+                              }
                             }
                           }
-                        }
-                      },
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                        child: Text("Login"),
-                      ),
-                    );
-                  }),
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          child: Text("Login"),
+                        ),
+                      );
+                    },
+                  ),
                   Builder(
                     builder: (context) => TextButton(
                       onPressed: () {

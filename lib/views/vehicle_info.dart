@@ -69,6 +69,10 @@ class VehicleInfoViewState extends State<VehicleInfoView> {
                       ),
                     ),
                   ),
+                Divider(
+                  thickness: 2,
+                  color: Colors.orange,
+                ),
                 Expanded(
                   child: ListView(
                     children: List.generate(
@@ -122,6 +126,6 @@ Widget makeInfo(name, field) {
   );
 }
 
-double calculateAvg(List<RefuelHistoryItem> list){
+double calculateAvg(List<RefuelHistoryItem> list) {
   return (list[0].kilometers - list[1].kilometers) / list[0].liters;
 }

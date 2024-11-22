@@ -33,6 +33,7 @@ class VehicleTile extends StatelessWidget {
       leading: Icon(
         Icons.directions_car,
         size: 40,
+        color: Colors.orange,
       ),
       title: Text("${vehicle.name}"),
       subtitle: Text("${vehicle.model} ${vehicle.year}"),

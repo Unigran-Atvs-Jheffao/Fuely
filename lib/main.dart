@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:trabalho_final/firebase_options.dart';
 import 'package:trabalho_final/state.dart';
-import 'package:trabalho_final/views/home.dart';
 import 'package:trabalho_final/views/login.dart';
 import 'package:trabalho_final/views/my_vehicles.dart';
 import 'package:trabalho_final/views/profile.dart';
