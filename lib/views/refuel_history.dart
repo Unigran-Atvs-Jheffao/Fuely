@@ -61,8 +61,10 @@ class _RefuelHistoryViewState extends State<RefuelHistoryView> {
                         );
                       } else {
                         return RefuelTile(
+                          idx: index-1,
+                          vehicle: finalData[vehIdx],
                           refuelHistoryItem:
-                              finalData[vehIdx].refuelHistory.reversed.toList()[index - 1],
+                              finalData[vehIdx].refuelHistory.toList()[index - 1],
                         );
                       }
                     },

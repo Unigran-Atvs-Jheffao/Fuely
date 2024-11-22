@@ -60,7 +60,7 @@ class VehicleInfoViewState extends State<VehicleInfoView> {
                                 style: TextStyle(fontSize: 20),
                               ),
                               Text(
-                                "${calculateAvg(vehicle.refuelHistory.reversed.toList())} Km/L",
+                                "${calculateAvg(vehicle.refuelHistory).toStringAsFixed(2)} Km/L",
                                 style: TextStyle(fontSize: 16),
                               ),
                             ],
@@ -86,8 +86,12 @@ class VehicleInfoViewState extends State<VehicleInfoView> {
                           );
                         } else {
                           return RefuelTile(
-                              refuelHistoryItem: vehicle.refuelHistory.reversed
-                                  .elementAt(index - 1));
+                              idx: index - 1,
+                              vehicle: vehicle,
+                              docId: widget.docId,
+                              parentState: this,
+                              refuelHistoryItem:
+                                  vehicle.refuelHistory.elementAt(index - 1));
                         }
                       },
                     ),

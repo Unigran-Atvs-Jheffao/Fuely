@@ -6,8 +6,15 @@ import 'package:trabalho_final/state.dart';
 
 class AddRefuelView extends StatefulWidget {
   final Vehicle vehicle;
-  final String? documentId;
-  const AddRefuelView({super.key, required this.vehicle, this.documentId});
+  final String documentId;
+  final RefuelHistoryItem? item;
+  final int? idx;
+  const AddRefuelView(
+      {super.key,
+      required this.vehicle,
+      required this.documentId,
+      this.item,
+      this.idx});
 
   @override
   State<AddRefuelView> createState() => _AddRefuelViewState();
@@ -18,6 +25,15 @@ class _AddRefuelViewState extends State<AddRefuelView> {
   var kmsController = TextEditingController();
 
   var db = FirebaseFirestore.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.item != null) {
+      litersController = TextEditingController(text: "${widget.item!.liters}");
+      kmsController = TextEditingController(text: "${widget.item!.kilometers}");
+    }
+  }
 
   final _formKey = GlobalKey<FormState>();
   @override
@@ -69,15 +85,31 @@ class _AddRefuelViewState extends State<AddRefuelView> {
                 ),
                 FilledButton(
                   onPressed: () {
-                    widget.vehicle.refuelHistory.add(
-                      RefuelHistoryItem(
+                    if (widget.item != null) {
+                      widget.vehicle.refuelHistory.removeAt(widget.idx!);
+
+                      widget.vehicle.refuelHistory.insert(
+                        widget.idx!,
+                        RefuelHistoryItem(
+                          date: widget.item!.date,
+                          kilometers:
+                              int.parse(kmsController.value.text, radix: 10),
+                          liters:
+                              int.parse(litersController.value.text, radix: 10),
+                        ),
+                      );
+                    } else {
+                      widget.vehicle.refuelHistory.insert(
+                        0,
+                        RefuelHistoryItem(
                           date: Timestamp.now(),
                           kilometers:
                               int.parse(kmsController.value.text, radix: 10),
-                          liters: int.parse(litersController.value.text,
-                              radix: 10)),
-                    );
-
+                          liters:
+                              int.parse(litersController.value.text, radix: 10),
+                        ),
+                      );
+                    }
                     db
                         .collection(COLLECTION_VEHICLES)
                         .doc(widget.documentId)
@@ -87,7 +119,7 @@ class _AddRefuelViewState extends State<AddRefuelView> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              "Created refuel for '${widget.vehicle.name}'",
+                              "${widget.item != null ? "Updated" : "Created"} refuel for'${widget.vehicle.name}'",
                             ),
                           ),
                         );
@@ -95,7 +127,7 @@ class _AddRefuelViewState extends State<AddRefuelView> {
                       },
                     );
                   },
-                  child: Text("Add Refuel"),
+                  child: Text("${widget.item != null ? "Edit" : "Add"} Refuel"),
                 ),
               ],
             ),
