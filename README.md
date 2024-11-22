@@ -48,7 +48,7 @@ This app is built using **Dart** and the **Flutter framework**, leveraging **Fir
 ### Steps  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/fuely.git
+   git clone https://github.com/Unigran-Atvs-Jheffao/Fuely.git
    ```  
 2. Navigate to the project folder:  
    ```bash
