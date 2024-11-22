@@ -1,6 +1,8 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class RefuelHistoryItem {
-  final DateTime date;
+  final Timestamp date;
   final int kilometers;
   final int liters;
 

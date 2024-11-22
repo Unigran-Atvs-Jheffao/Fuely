@@ -4,6 +4,7 @@ import 'package:trabalho_final/models/vehicle.dart';
 import 'package:trabalho_final/state.dart';
 import 'package:trabalho_final/views/add_vehicle.dart';
 import 'package:trabalho_final/views/my_vehicles.dart';
+import 'package:trabalho_final/views/vehicle_info.dart';
 
 class VehicleTile extends StatelessWidget {
   final Vehicle vehicle;
@@ -20,7 +21,14 @@ class VehicleTile extends StatelessWidget {
     var db = FirebaseFirestore.instance;
 
     return ListTile(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VehicleInfoView(docId: documentId),
+          ),
+        );
+      },
       isThreeLine: true,
       leading: Icon(
         Icons.directions_car,
@@ -72,7 +80,9 @@ class VehicleTile extends StatelessWidget {
                               .then(
                             (e) {
                               Navigator.pop(context);
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Deleted vehicle '${vehicle.name} ${vehicle.year}'")));
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text(
+                                      "Deleted vehicle '${vehicle.name} ${vehicle.year}'")));
                               parentState.reload();
                             },
                           );

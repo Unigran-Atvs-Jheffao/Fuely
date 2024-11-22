@@ -138,7 +138,7 @@ class _AddVehicleState extends State<AddVehicle> {
                       );
                     }
                   },
-                  child: Text(widget.toEdit != null ? "Editar" : "Adicionar"),
+                  child: Text(widget.toEdit != null ? "Edit" : "Add"),
                 ),
               ],
             ),

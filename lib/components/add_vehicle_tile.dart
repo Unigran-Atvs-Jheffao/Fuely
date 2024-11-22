@@ -10,7 +10,7 @@ class AddVehicleTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(Icons.add),
-      title: Text("Adicionar Veiculo"),
+      title: Text("Add Vehicle"),
       onTap: () => {
         Navigator.push(
           context,

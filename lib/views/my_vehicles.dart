@@ -5,7 +5,6 @@ import 'package:trabalho_final/components/add_vehicle_tile.dart';
 import 'package:trabalho_final/components/vehicle_tile.dart';
 import 'package:trabalho_final/models/vehicle.dart';
 import 'package:trabalho_final/state.dart';
-import 'package:trabalho_final/views/add_vehicle.dart';
 
 class MyVehiclesView extends StatefulWidget {
   const MyVehiclesView({super.key});

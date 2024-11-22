@@ -38,7 +38,11 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Fuely"),
+        title: Text([
+          "My Vehicles",
+          "Refuel History",
+          "Profile"
+        ][screen]),
       ),
       drawer: Drawer(
         child: Builder(
@@ -56,31 +60,24 @@ class _MainAppState extends State<MainApp> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home),
-              title: const Text('Home'),
+              leading: Icon(Icons.directions_car),
+              title: const Text('My Vehicles'),
               onTap: () {
                 setScreen(context, 0);
               },
             ),
             ListTile(
-              leading: Icon(Icons.directions_car),
-              title: const Text('Meus Veiculos'),
+              leading: Icon(Icons.history),
+              title: const Text('Refuel History'),
               onTap: () {
                 setScreen(context, 1);
               },
             ),
             ListTile(
-              leading: Icon(Icons.history),
-              title: const Text('Histórico de Abastecimento'),
+              leading: Icon(Icons.person),
+              title: const Text('Profile'),
               onTap: () {
                 setScreen(context, 2);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.person),
-              title: const Text('Perfil'),
-              onTap: () {
-                setScreen(context, 3);
               },
             ),
             ListTile(
@@ -95,7 +92,6 @@ class _MainAppState extends State<MainApp> {
         ),
       ),
       body: [
-        const HomeView(),
         const MyVehiclesView(),
         const RefuelHistoryView(),
         const ProfileView()
