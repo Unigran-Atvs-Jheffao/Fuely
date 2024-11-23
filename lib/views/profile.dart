@@ -71,7 +71,6 @@ class _ProfileViewState extends State<ProfileView> {
               onPressed: () {
                 FirebaseAuth.instance
                     .sendPasswordResetEmail(email: usr.email!);
-                Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Password change email sent'),
